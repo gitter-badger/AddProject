@@ -1,47 +1,44 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { ActionCreators } from 'redux-undo'
-import { addProject } from '../actions'
-import AddProject from '../components/AddProject'
-import Footer from '../components/Footer'
-import ProjectsList from '../components/ProjectsList'
+import { addScenario } from '../actions'
+import AddScenario from '../components/AddScenario'
+import ProjectApp from '../components/ProjectApp'
 
 class App extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {scenariosDisplay: 'inline', projectsDisplay: 'none'};
+    }
+  handleNext(e) {
+      this.setState({scenariosDisplay: 'none', projectsDisplay: 'inline'})
+    }
   render() {
     const { dispatch } = this.props
     return (
       <div>
-        <AddProject
-          onProjectSubmit={(project, date, scenario) => dispatch(addProject(project, date, scenario))} />
+        <div style={{display: this.state.scenariosDisplay}}>
+        <AddScenario addscenario={this.props.scenarios} onScenarioSubmit={(scenarioName) => dispatch(addScenario(scenarioName))} />
+        <button onClick={(e) => this.handleNext(e)}>Next</button>
+        </div>
         <br/><br />
-        <ProjectsList
-          projects={this.props.projects} />
-          <Footer
-          onUndo={() => dispatch(ActionCreators.undo())}
-          onRedo={() => dispatch(ActionCreators.redo())}
-          undoDisabled={this.props.undoDisabled}
-          redoDisabled={this.props.redoDisabled} />
+        <br /><br />
+        <div style={{display: this.state.projectsDisplay}}>
+        <ProjectApp />
+        </div>
       </div>
-
     )
   }
 }
 
 
 App.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  projects: PropTypes.arrayOf(PropTypes.shape({
-    text: PropTypes.string.isRequired
-  }).isRequired).isRequired,
-  undoDisabled: PropTypes.bool.isRequired,
-  redoDisabled: PropTypes.bool.isRequired
+  dispatch: PropTypes.func.isRequired
 }
 
 function select(state) {
   return {
-    undoDisabled: state.projects.past.length === 0,
-    redoDisabled: state.projects.future.length === 0,
-    projects: state.projects.present
+    scenarios: state.scenarios.present
   }
 }
 
