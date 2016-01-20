@@ -1,7 +1,7 @@
 {
-  "name": "redux-todos-with-undo-example",
+  "name": "add-projects",
   "version": "0.0.0",
-  "description": "Redux todos with undo example",
+  "description": "Add projects",
   "scripts": {
     "start": "node server.js"
   },
@@ -15,6 +15,7 @@
   },
   "homepage": "http://rackt.github.io/redux",
   "dependencies": {
+    "immutable": "^3.7.6",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",

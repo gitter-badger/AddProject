@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 export default class Project extends Component {
   render() {
+    const scenario = this.props.scenario
     return (
       <tr >
       <td style={{
@@ -22,14 +23,9 @@ export default class Project extends Component {
       <td style={{
           background: 'yellow'
         }}>
-        {this.props.scenario}
+        {scenario.map(scenario => <p>{scenario}</p>)}
       </td>
       </tr>
     )
   }
-}
-
-Project.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired
 }

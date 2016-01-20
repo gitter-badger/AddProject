@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import undoable, { distinctState } from 'redux-undo'
 
 import { ADD_PROJECT } from './actions'
+import { ADD_SCENARIO } from './actions'
 
 function project(state, action) {
   switch (action.type) {
@@ -29,8 +30,22 @@ function projects(state = [], action) {
   }
 }
 
+function scenarios(state = [], action) {
+  switch (action.type) {
+    case ADD_SCENARIO:
+      return [
+        ...state,
+        action.scenarioName
+      ]
+    default:
+      return state
+  }
+}
+
+
 const saveProjectApp = combineReducers({
-  projects: undoable(projects, { filter: distinctState() })
+  projects: undoable(projects, { filter: distinctState() }),
+  scenarios: undoable(scenarios, { filter: distinctState() })
 })
 
 export default saveProjectApp

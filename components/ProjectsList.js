@@ -9,7 +9,7 @@ export default class ProjectsList extends Component {
       <th>ID</th>
       <th>Project Name</th>
       <th>Reporting Date</th>
-      <th>Scenario</th>
+      <th>Scenarios</th>
       </thead>
       <tbody>
         {this.props.projects.map(project =>
@@ -22,7 +22,6 @@ export default class ProjectsList extends Component {
 }
 
 ProjectsList.propTypes = {
-  onTodoClick: PropTypes.func.isRequired,
   projects: PropTypes.arrayOf(PropTypes.shape({
     text: PropTypes.string.isRequired,
   }).isRequired).isRequired
