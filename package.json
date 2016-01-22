@@ -1,7 +1,7 @@
 {
   "name": "add-projects",
   "version": "0.0.0",
-  "description": "Add projects",
+  "description": "Application to add new projects",
   "scripts": {
     "start": "node server.js"
   },
